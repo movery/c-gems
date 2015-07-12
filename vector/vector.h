@@ -25,7 +25,7 @@ int mwv_resize(mwVector *v, size_t new_size);
 
 int mwv_shrink_to_fit(mwVector *v);
 
-int mwv_at(mwVector *v, size_t n);
+int mwv_at(mwVector *v, size_t n, void **rdata);
 int mwv_assign(mwVector *v, void *data, size_t n);
 
 int mwv_front(mwVector *v, void **rdata);
