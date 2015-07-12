@@ -29,6 +29,9 @@ int mwv_init(mwVector **v, size_t member_size)
 
         new_vector = malloc(sizeof(mwVector));
 
+        if(!new_vector)
+                return -1;
+
         CAP(new_vector) = 4;
 
         MEMBERS(new_vector) = 0;
