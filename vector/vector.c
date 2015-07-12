@@ -115,13 +115,31 @@ int mwv_shrink_to_fit(mwVector *v)
                 rc = realloc( ARRAY(v), shrunk_size + 1);
 
                 if(!rc)
-                        return -1
+                        return -1;
 
                 CAP(v) = shrunk_size;
         }
         return 0;
 }
 
+int mwv_at(mwVector *v, size_t n, void **rdata)
+{
+        if(!v || !rdata || *rdata)
+                return -1;
+
+        if(MEMBERS(v) < n)
+                return -1;
+
+        *rdata = malloc(MEMBER_SIZE(v));
+
+        if(!*rdata)
+                return -1;
+
+        void *source = ((char *)ARRAY(v)) + n * MEMBER_SIZE(v);
+        memcpy(*rdata, source,  MEMBER_SIZE(v));
+
+        return 0;
+}
 #undef ARRAY
 #undef CAP
 #undef MEMBERS
